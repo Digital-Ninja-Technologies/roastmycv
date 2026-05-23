@@ -15,16 +15,10 @@ export function ScoreRing({ value, label, size = 120 }: Props) {
     <div className="flex flex-col items-center gap-2">
       <div className="relative" style={{ width: size, height: size }}>
         <svg width={size} height={size} className="-rotate-90">
-          <defs>
-            <linearGradient id={`grad-${label}`} x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="oklch(0.7 0.28 300)" />
-              <stop offset="100%" stopColor="oklch(0.72 0.26 350)" />
-            </linearGradient>
-          </defs>
           <circle cx={size / 2} cy={size / 2} r={r} stroke="oklch(1 0 0 / 0.08)" strokeWidth={stroke} fill="none" />
           <circle
             cx={size / 2} cy={size / 2} r={r}
-            stroke={value >= 70 ? `url(#grad-${label})` : color}
+            stroke={value >= 70 ? "var(--primary)" : color}
             strokeWidth={stroke} fill="none"
             strokeDasharray={c} strokeDashoffset={offset}
             strokeLinecap="round"
