@@ -53,7 +53,7 @@ function Dashboard() {
             {mockReports.map((r) => (
               <Link key={r.id} to="/report/$id" params={{ id: r.id }}>
                 <Card className="glass p-5 flex items-center gap-6 hover:border-accent/40 transition-all group">
-                  <div className="h-12 w-12 rounded-lg bg-gradient-to-br from-neon-purple/30 to-neon-pink/20 border border-neon-purple/30 flex items-center justify-center font-display font-bold text-lg">
+                  <div className="h-12 w-12 rounded-lg bg-primary/20 border border-primary/30 flex items-center justify-center font-display font-bold text-lg">
                     {r.score}
                   </div>
                   <div className="flex-1 min-w-0">

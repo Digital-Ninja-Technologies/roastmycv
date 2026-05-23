@@ -32,7 +32,7 @@ function Signup() {
           <div className="glow-ring rounded-xl" />
           <div className="relative">
             <div className="flex items-center gap-2 mb-6">
-              <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br from-neon-purple to-neon-pink">
+              <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-primary">
                 <Flame className="h-4 w-4 text-white" />
               </span>
               <span className="font-display font-semibold">Get started free</span>

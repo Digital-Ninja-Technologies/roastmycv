@@ -67,7 +67,7 @@ export function DemoAnalyzer() {
           {STEPS.map((s, i) => (
             <div key={s} className={`flex items-center gap-3 text-sm transition-opacity ${i <= stepIdx ? "opacity-100" : "opacity-30"}`}>
               {i < stepIdx ? (
-                <span className="h-4 w-4 rounded-full bg-gradient-to-br from-neon-purple to-neon-pink" />
+                <span className="h-4 w-4 rounded-full bg-primary" />
               ) : i === stepIdx ? (
                 <Loader2 className="h-4 w-4 animate-spin text-neon-pink" />
               ) : (
