@@ -5,7 +5,7 @@ import { Sparkles, TrendingUp, Smartphone, Zap } from "lucide-react";
 export function HeroMockup() {
   return (
     <div className="relative">
-      <div className="absolute -inset-8 bg-gradient-to-tr from-neon-purple/30 via-neon-blue/20 to-neon-pink/30 blur-3xl rounded-full animate-glow-pulse" />
+      <div className="absolute -inset-8 bg-primary/20 blur-3xl rounded-full animate-glow-pulse" />
       <Card className="glass-strong relative p-5 rounded-2xl animate-float">
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-2">
@@ -20,12 +20,12 @@ export function HeroMockup() {
         </div>
 
         <div className="grid grid-cols-2 gap-3 mb-4">
-          <div className="rounded-xl p-4 bg-gradient-to-br from-neon-purple/20 to-transparent border border-neon-purple/20">
+          <div className="rounded-xl p-4 bg-primary/20 border border-primary/20">
             <div className="text-xs text-muted-foreground">UX Score</div>
             <div className="font-display text-3xl font-bold mt-1">78</div>
             <Progress value={78} className="h-1 mt-2" />
           </div>
-          <div className="rounded-xl p-4 bg-gradient-to-br from-neon-pink/20 to-transparent border border-neon-pink/20">
+          <div className="rounded-xl p-4 bg-neon-pink/20 border border-neon-pink/20">
             <div className="text-xs text-muted-foreground">Conversion</div>
             <div className="font-display text-3xl font-bold mt-1">62</div>
             <Progress value={62} className="h-1 mt-2" />
@@ -47,7 +47,7 @@ export function HeroMockup() {
           ))}
         </div>
 
-        <div className="mt-4 rounded-xl p-3 bg-gradient-to-br from-neon-purple/10 to-neon-pink/10 border border-border/70">
+        <div className="mt-4 rounded-xl p-3 bg-primary/10 border border-border/70">
           <div className="flex items-center gap-2 text-xs font-medium mb-1">
             <Sparkles className="h-3.5 w-3.5 text-neon-pink" />
             AI suggestion

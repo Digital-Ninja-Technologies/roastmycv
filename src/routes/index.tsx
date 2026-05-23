@@ -134,7 +134,7 @@ function Landing() {
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {features.map((f) => (
               <Card key={f.title} className="glass p-5 hover:border-accent/40 transition-all hover:-translate-y-1 group">
-                <div className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-neon-purple/30 to-neon-pink/20 border border-neon-purple/30 mb-4 group-hover:scale-110 transition-transform">
+                <div className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-primary/20 border border-primary/30 mb-4 group-hover:scale-110 transition-transform">
                   <f.icon className="h-5 w-5 text-neon-pink" />
                 </div>
                 <h3 className="font-medium">{f.title}</h3>
@@ -147,7 +147,6 @@ function Landing() {
 
       {/* DEMO */}
       <section id="demo" className="py-24 relative">
-        <div className="absolute inset-0 bg-[var(--gradient-mesh)] opacity-50 pointer-events-none" />
         <div className="mx-auto max-w-7xl px-6 relative">
           <div className="text-center max-w-2xl mx-auto mb-10">
             <div className="inline-flex items-center gap-2 glass rounded-full px-3 py-1 text-xs mb-4">
@@ -176,7 +175,7 @@ function Landing() {
                 </div>
                 <p className="text-sm text-muted-foreground leading-relaxed">"{t.text}"</p>
                 <div className="mt-5 flex items-center gap-3">
-                  <div className="h-10 w-10 rounded-full bg-gradient-to-br from-neon-purple to-neon-pink flex items-center justify-center text-white font-semibold">
+                  <div className="h-10 w-10 rounded-full bg-primary flex items-center justify-center text-white font-semibold">
                     {t.name.charAt(0)}
                   </div>
                   <div>
@@ -224,7 +223,6 @@ function Landing() {
       <section className="py-24">
         <div className="mx-auto max-w-5xl px-6">
           <Card className="glass-strong relative overflow-hidden p-12 text-center">
-            <div className="absolute inset-0 bg-[var(--gradient-mesh)] opacity-60 pointer-events-none" />
             <div className="relative">
               <h2 className="font-display text-5xl sm:text-6xl font-bold">
                 Stop <span className="text-gradient">Losing Users.</span>
@@ -258,7 +256,7 @@ function PricingCard({
       <div className="relative">
         <div className="flex items-baseline justify-between">
           <h3 className="font-display text-2xl">{name}</h3>
-          {highlight && <span className="text-xs px-2 py-1 rounded-full bg-gradient-to-r from-neon-purple to-neon-pink text-white">Popular</span>}
+          {highlight && <span className="text-xs px-2 py-1 rounded-full bg-primary text-white">Popular</span>}
         </div>
         <div className="mt-4 flex items-baseline gap-1">
           <span className="font-display text-5xl font-bold">{price}</span>

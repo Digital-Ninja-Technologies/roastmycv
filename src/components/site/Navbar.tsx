@@ -8,7 +8,7 @@ export function Navbar() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 mt-4">
         <nav className="glass-strong rounded-2xl px-4 sm:px-6 h-14 flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2 group">
-            <span className="relative inline-flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-neon-purple to-neon-pink shadow-[0_0_20px_oklch(0.7_0.28_300/0.6)] group-hover:scale-110 transition-transform">
+            <span className="relative inline-flex h-8 w-8 items-center justify-center rounded-lg bg-primary shadow-[0_0_20px_oklch(0.7_0.28_300/0.6)] group-hover:scale-110 transition-transform">
               <Flame className="h-4 w-4 text-white" />
             </span>
             <span className="font-display font-semibold tracking-tight">

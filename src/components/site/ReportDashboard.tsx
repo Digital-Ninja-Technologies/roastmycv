@@ -83,7 +83,7 @@ export function ReportDashboard({ report }: { report: AuditReport }) {
           <div className="grid sm:grid-cols-2 gap-3">
             {report.improvements.map((s, i) => (
               <div key={i} className="flex items-start gap-3 p-3 rounded-lg border border-border/70 bg-background/30">
-                <span className="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-gradient-to-br from-neon-purple to-neon-pink text-xs font-semibold text-white">
+                <span className="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-primary text-xs font-semibold text-white">
                   {i + 1}
                 </span>
                 <span className="text-sm text-muted-foreground">{s}</span>

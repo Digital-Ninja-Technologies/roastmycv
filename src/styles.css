@@ -40,7 +40,6 @@
 
   --animate-float: float 6s ease-in-out infinite;
   --animate-glow-pulse: glow-pulse 3s ease-in-out infinite;
-  --animate-gradient: gradient-shift 8s ease infinite;
   --animate-fade-in-up: fade-in-up 0.6s ease-out forwards;
 
   @keyframes float {
@@ -50,10 +49,6 @@
   @keyframes glow-pulse {
     0%, 100% { opacity: 0.55; }
     50% { opacity: 0.95; }
-  }
-  @keyframes gradient-shift {
-    0%, 100% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
   }
   @keyframes fade-in-up {
     from { opacity: 0; transform: translateY(20px); }
@@ -94,13 +89,6 @@
   --neon-blue: oklch(0.72 0.22 240);
   --neon-pink: oklch(0.72 0.26 350);
 
-  --gradient-primary: linear-gradient(135deg, var(--neon-purple), var(--neon-pink));
-  --gradient-mesh: radial-gradient(at 20% 20%, oklch(0.7 0.28 300 / 0.35), transparent 50%),
-                   radial-gradient(at 80% 0%, oklch(0.72 0.22 240 / 0.3), transparent 50%),
-                   radial-gradient(at 70% 80%, oklch(0.72 0.26 350 / 0.28), transparent 50%);
-  --shadow-glow: 0 0 60px oklch(0.7 0.28 300 / 0.45);
-  --shadow-glow-pink: 0 0 50px oklch(0.72 0.26 350 / 0.5);
-
   --sidebar: var(--card);
   --sidebar-foreground: var(--foreground);
   --sidebar-primary: var(--primary);
@@ -124,10 +112,6 @@
     background-color: var(--color-background);
     color: var(--color-foreground);
     font-family: var(--font-sans);
-    background-image:
-      radial-gradient(ellipse 80% 50% at 50% -20%, oklch(0.7 0.28 300 / 0.25), transparent),
-      radial-gradient(ellipse 60% 40% at 100% 100%, oklch(0.72 0.22 240 / 0.18), transparent);
-    background-attachment: fixed;
     min-height: 100vh;
   }
   h1, h2, h3, h4 { font-family: var(--font-display); letter-spacing: -0.02em; }
@@ -145,16 +129,11 @@
     border: 1px solid oklch(1 0 0 / 0.1);
   }
   .text-gradient {
-    background: linear-gradient(135deg, oklch(0.85 0.2 300), oklch(0.78 0.22 350), oklch(0.78 0.2 240));
-    background-size: 200% 200%;
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: gradient-shift 8s ease infinite;
+    color: var(--color-primary);
   }
   .btn-glow {
     position: relative;
-    background: linear-gradient(135deg, var(--neon-purple), var(--neon-pink));
+    background: var(--color-primary);
     color: white;
     box-shadow: 0 0 30px oklch(0.7 0.28 300 / 0.5), 0 0 60px oklch(0.72 0.26 350 / 0.25);
     transition: all 0.3s ease;
@@ -168,7 +147,7 @@
     inset: -1px;
     border-radius: inherit;
     padding: 1px;
-    background: linear-gradient(135deg, var(--neon-purple), var(--neon-blue), var(--neon-pink));
+    background: var(--color-primary);
     -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
     -webkit-mask-composite: xor;
             mask-composite: exclude;

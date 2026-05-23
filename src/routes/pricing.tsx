@@ -50,7 +50,7 @@ function Pricing() {
                 <div className="relative">
                   <div className="flex items-center justify-between">
                     <h3 className="font-display text-2xl">{p.name}</h3>
-                    {p.highlight && <span className="text-xs px-2 py-1 rounded-full bg-gradient-to-r from-neon-purple to-neon-pink text-white">Popular</span>}
+                    {p.highlight && <span className="text-xs px-2 py-1 rounded-full bg-primary text-white">Popular</span>}
                   </div>
                   <div className="mt-4 flex items-baseline gap-1">
                     <span className="font-display text-5xl font-bold">{p.price}</span>

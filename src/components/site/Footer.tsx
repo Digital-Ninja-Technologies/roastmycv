@@ -7,7 +7,7 @@ export function Footer() {
       <div className="mx-auto max-w-7xl px-6 py-12 grid gap-8 md:grid-cols-4">
         <div className="md:col-span-2">
           <div className="flex items-center gap-2">
-            <span className="inline-flex h-7 w-7 items-center justify-center rounded-lg bg-gradient-to-br from-neon-purple to-neon-pink">
+            <span className="inline-flex h-7 w-7 items-center justify-center rounded-lg bg-primary">
               <Flame className="h-4 w-4 text-white" />
             </span>
             <span className="font-display font-semibold">RoastMySite <span className="text-gradient">AI</span></span>
