@@ -2,16 +2,16 @@ import { ScoreRing } from "./ScoreRing";
 import { Card } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
-import { CheckCircle2, AlertTriangle, Sparkles, ArrowRight } from "lucide-react";
-import type { AuditReport } from "@/lib/analyze";
+import { CheckCircle2, AlertTriangle, Sparkles, ArrowRight, Flame } from "lucide-react";
+import type { CVReport } from "@/lib/analyze";
 
-export function ReportDashboard({ report }: { report: AuditReport }) {
+export function ReportDashboard({ report }: { report: CVReport }) {
   const breakdown = [
-    { label: "UX", value: report.ux },
-    { label: "UI", value: report.ui },
-    { label: "Conversion", value: report.conversion },
-    { label: "Trust", value: report.trust },
-    { label: "Mobile", value: report.mobile },
+    { label: "Clarity", value: report.clarity },
+    { label: "Impact", value: report.impact },
+    { label: "Formatting", value: report.formatting },
+    { label: "Keywords", value: report.keywords },
+    { label: "Experience", value: report.experience },
   ];
 
   return (
@@ -20,12 +20,15 @@ export function ReportDashboard({ report }: { report: AuditReport }) {
         <div className="absolute -top-24 -right-24 h-64 w-64 rounded-full bg-neon-purple/30 blur-3xl pointer-events-none" />
         <div className="grid gap-8 md:grid-cols-[auto_1fr] items-center relative">
           <div className="flex items-center justify-center">
-            <ScoreRing value={report.overall} label="Overall Score" size={160} />
+            <ScoreRing value={report.overall} label="CV Score" size={160} />
           </div>
           <div className="space-y-4">
             <div>
-              <div className="text-xs uppercase tracking-wider text-muted-foreground">Audit for</div>
-              <div className="font-display text-xl truncate">{report.url}</div>
+              <div className="text-xs uppercase tracking-wider text-muted-foreground">Roast for</div>
+              <div className="font-display text-xl truncate">{report.candidate}</div>
+              {report.targetRole && (
+                <div className="text-xs text-muted-foreground mt-1">Target role: {report.targetRole}</div>
+              )}
             </div>
             <div className="grid grid-cols-2 sm:grid-cols-5 gap-4">
               {breakdown.map((b) => (
@@ -40,6 +43,14 @@ export function ReportDashboard({ report }: { report: AuditReport }) {
             </div>
           </div>
         </div>
+      </Card>
+
+      <Card className="glass p-6">
+        <div className="flex items-center gap-2 mb-3">
+          <Flame className="h-5 w-5 text-neon-pink" />
+          <h3 className="font-display text-lg">The roast</h3>
+        </div>
+        <p className="text-sm text-muted-foreground leading-relaxed italic">"{report.roast}"</p>
       </Card>
 
       <div className="grid gap-6 md:grid-cols-2">
@@ -61,7 +72,7 @@ export function ReportDashboard({ report }: { report: AuditReport }) {
         <Card className="glass p-6">
           <div className="flex items-center gap-2 mb-4">
             <AlertTriangle className="h-5 w-5 text-[oklch(0.75_0.22_30)]" />
-            <h3 className="font-display text-lg">Critical UX problems</h3>
+            <h3 className="font-display text-lg">Critical CV problems</h3>
           </div>
           <ul className="space-y-3">
             {report.problems.map((p, i) => (
@@ -78,7 +89,7 @@ export function ReportDashboard({ report }: { report: AuditReport }) {
         <Card className="glass p-6 md:col-span-2">
           <div className="flex items-center gap-2 mb-4">
             <Sparkles className="h-5 w-5 text-neon-pink" />
-            <h3 className="font-display text-lg">Suggested improvements</h3>
+            <h3 className="font-display text-lg">How to fix it</h3>
           </div>
           <div className="grid sm:grid-cols-2 gap-3">
             {report.improvements.map((s, i) => (
@@ -93,21 +104,21 @@ export function ReportDashboard({ report }: { report: AuditReport }) {
         </Card>
 
         <Card className="glass p-6">
-          <div className="text-xs uppercase tracking-wider text-muted-foreground mb-2">Recommended CTA rewrite</div>
+          <div className="text-xs uppercase tracking-wider text-muted-foreground mb-2">Suggested summary rewrite</div>
           <div className="space-y-2">
-            <div className="text-sm line-through text-muted-foreground">{report.ctaRewrite.before}</div>
-            <div className="flex items-center gap-2 text-sm font-medium">
-              <ArrowRight className="h-4 w-4 text-neon-pink" />
-              <span className="text-gradient">{report.ctaRewrite.after}</span>
-            </div>
+            <div className="text-sm line-through text-muted-foreground">{report.summaryRewrite.before}</div>
+            <div className="text-sm font-medium">{report.summaryRewrite.after}</div>
           </div>
         </Card>
 
         <Card className="glass p-6">
-          <div className="text-xs uppercase tracking-wider text-muted-foreground mb-2">Suggested hero rewrite</div>
+          <div className="text-xs uppercase tracking-wider text-muted-foreground mb-2">Bullet rewrite example</div>
           <div className="space-y-2">
-            <div className="text-sm line-through text-muted-foreground">{report.heroRewrite.before}</div>
-            <div className="text-sm font-medium">{report.heroRewrite.after}</div>
+            <div className="text-sm line-through text-muted-foreground">{report.bulletRewrite.before}</div>
+            <div className="flex items-start gap-2 text-sm font-medium">
+              <ArrowRight className="h-4 w-4 text-neon-pink mt-0.5 shrink-0" />
+              <span className="text-gradient">{report.bulletRewrite.after}</span>
+            </div>
           </div>
         </Card>
       </div>

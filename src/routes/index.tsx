@@ -6,41 +6,41 @@ import { Footer } from "@/components/site/Footer";
 import { HeroMockup } from "@/components/site/HeroMockup";
 import { DemoAnalyzer } from "@/components/site/DemoAnalyzer";
 import {
-  ArrowRight, Eye, MousePointerClick, Smartphone, Target, Type,
-  Layout, ShieldAlert, Sparkles, Link2, Brain, ListChecks, Star, Check,
+  ArrowRight, FileSearch, Target, Type, Layout, Sparkles,
+  FileText, Brain, ListChecks, Star, Check, ShieldCheck, Briefcase,
 } from "lucide-react";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "RoastMySite AI — AI-powered website audits that improve conversions" },
-      { name: "description", content: "Paste a URL and get an instant AI UX, UI, and conversion audit for your startup website." },
+      { title: "RoastMyCV AI — AI-powered CV roasts that land interviews" },
+      { name: "description", content: "Paste your CV and get an instant AI roast with brutally honest feedback, rewrites, and prioritized tips that get you interviews." },
     ],
   }),
   component: Landing,
 });
 
 const features = [
-  { icon: Eye, title: "UX Audit", desc: "Spot friction points in seconds with heuristic + AI scoring." },
-  { icon: MousePointerClick, title: "Conversion Analysis", desc: "Find what's killing your funnel and how to fix it." },
-  { icon: Smartphone, title: "Mobile Responsiveness", desc: "Tap-target, viewport and layout checks on every breakpoint." },
-  { icon: Target, title: "CTA Optimization", desc: "Get rewritten CTAs that match user intent and outcome." },
-  { icon: Type, title: "Copywriting Suggestions", desc: "Hero, headline and body rewrites in your brand voice." },
-  { icon: Layout, title: "Visual Hierarchy Review", desc: "See exactly where attention goes — and where it should." },
-  { icon: ShieldAlert, title: "Dark Pattern Detection", desc: "Flag manipulative UI patterns that hurt long-term trust." },
-  { icon: Sparkles, title: "AI Redesign Insights", desc: "Actionable, prioritized fixes — not vague advice." },
+  { icon: FileSearch, title: "Clarity Audit", desc: "Spot vague language, jargon, and filler in seconds." },
+  { icon: Target, title: "Impact Scoring", desc: "Measure outcomes vs. tasks — recruiters care about results." },
+  { icon: Type, title: "Bullet Rewrites", desc: "Get every bullet rewritten as Action → Metric → Outcome." },
+  { icon: Layout, title: "Formatting Review", desc: "Length, hierarchy, dates, and scan-ability checks." },
+  { icon: ShieldCheck, title: "ATS Keyword Match", desc: "See if your CV beats applicant tracking systems." },
+  { icon: Briefcase, title: "Role Tailoring", desc: "Tune your CV to a specific target job in one click." },
+  { icon: Sparkles, title: "AI Summary Rewrite", desc: "A 2-line summary that hooks a recruiter in 6 seconds." },
+  { icon: ListChecks, title: "Prioritized Fix List", desc: "What to fix first, second, third — no vague advice." },
 ];
 
 const steps = [
-  { icon: Link2, title: "Paste your URL", desc: "Drop the link to any page — landing, pricing, signup." },
-  { icon: Brain, title: "AI scans your site", desc: "We analyze UX, UI, copy, conversion flow and mobile UX." },
-  { icon: ListChecks, title: "Get actionable insights", desc: "A prioritized fix-list, rewrites and a redesign brief." },
+  { icon: FileText, title: "Paste your CV", desc: "Drop in the full text of your CV — or upload a .txt file." },
+  { icon: Brain, title: "AI roasts it", desc: "We score clarity, impact, formatting, keywords and experience." },
+  { icon: ListChecks, title: "Get the fix list", desc: "Brutally honest feedback and rewritten bullets you can paste back in." },
 ];
 
 const testimonials = [
-  { name: "Maya Chen", role: "Founder, Linearloop", text: "Found 3 hero-copy issues we'd been blind to for months. Conversions up 22% in a week." },
-  { name: "Jordan Patel", role: "CEO, Stacksmith", text: "Cheaper than a designer audit, and the rewrites actually shipped." },
-  { name: "Sofia Ruiz", role: "Cofounder, Beampay", text: "The mobile audit alone paid for the whole year. Stop guessing." },
+  { name: "Maya Chen", role: "Landed PM role at Linear", text: "Three rewrites and I had 4 interviews the next week. Brutally honest in the best way." },
+  { name: "Jordan Patel", role: "Senior Engineer, Stripe", text: "I'd been getting ghosted for months. The keyword match score alone fixed it." },
+  { name: "Sofia Ruiz", role: "Designer, Figma", text: "It told me my CV read like a job description. It was right. Rewrote it that night." },
 ];
 
 function Landing() {
@@ -55,23 +55,23 @@ function Landing() {
           <div>
             <div className="inline-flex items-center gap-2 glass rounded-full px-3 py-1 text-xs text-muted-foreground mb-6 animate-fade-in-up">
               <span className="h-1.5 w-1.5 rounded-full bg-neon-pink animate-glow-pulse" />
-              AI-powered • Trusted by 10k+ founders
+              AI-powered • Trusted by 25k+ job seekers
             </div>
             <h1 className="font-display text-5xl sm:text-6xl lg:text-7xl font-bold leading-[1.05] tracking-tight">
-              Your Website <br />
-              <span className="text-gradient">Loses Users</span> in 5 Seconds.
+              Your CV <br />
+              <span className="text-gradient">Gets Ghosted</span> in 6 Seconds.
             </h1>
             <p className="mt-6 text-lg text-muted-foreground max-w-xl">
-              Get an instant AI-powered UX, UI, and conversion audit for your startup website — with prioritized fixes and rewritten copy.
+              Get an instant AI roast of your CV — with brutally honest feedback, rewritten bullets, and a prioritized fix list that gets you interviews.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <a href="#demo">
                 <Button variant="hero" size="lg" className="h-12 px-6 text-base">
-                  Roast My Website <ArrowRight className="h-4 w-4" />
+                  Roast My CV <ArrowRight className="h-4 w-4" />
                 </Button>
               </a>
               <a href="#demo">
-                <Button variant="glass" size="lg" className="h-12 px-6 text-base">View Demo</Button>
+                <Button variant="glass" size="lg" className="h-12 px-6 text-base">See sample roast</Button>
               </a>
             </div>
             <div className="mt-8 flex items-center gap-6 text-xs text-muted-foreground">
@@ -79,7 +79,7 @@ function Landing() {
               <span>•</span>
               <span>30-second results</span>
               <span>•</span>
-              <span>Free forever plan</span>
+              <span>Stays in your browser</span>
             </div>
           </div>
           <HeroMockup />
@@ -90,9 +90,9 @@ function Landing() {
       <section className="py-12 border-y border-border/50">
         <div className="mx-auto max-w-5xl px-6 grid grid-cols-1 sm:grid-cols-3 gap-8 text-center">
           {[
-            { v: "10k+", l: "websites roasted" },
-            { v: "92%", l: "improvement rate" },
-            { v: "4.9 / 5", l: "founder rating" },
+            { v: "25k+", l: "CVs roasted" },
+            { v: "3.4x", l: "more interview callbacks" },
+            { v: "4.9 / 5", l: "candidate rating" },
           ].map((s) => (
             <div key={s.l}>
               <div className="font-display text-4xl font-bold text-gradient">{s.v}</div>
@@ -107,7 +107,7 @@ function Landing() {
         <div className="mx-auto max-w-7xl px-6">
           <div className="text-center max-w-2xl mx-auto mb-14">
             <h2 className="font-display text-4xl sm:text-5xl font-bold">How it works</h2>
-            <p className="mt-4 text-muted-foreground">From URL to actionable redesign brief in under a minute.</p>
+            <p className="mt-4 text-muted-foreground">From paste to interview-ready in under a minute.</p>
           </div>
           <div className="grid md:grid-cols-3 gap-6">
             {steps.map((s, i) => (
@@ -128,8 +128,8 @@ function Landing() {
       <section id="features" className="py-24">
         <div className="mx-auto max-w-7xl px-6">
           <div className="text-center max-w-2xl mx-auto mb-14">
-            <h2 className="font-display text-4xl sm:text-5xl font-bold">Everything you need to <span className="text-gradient">convert</span></h2>
-            <p className="mt-4 text-muted-foreground">One audit. Eight expert lenses. Zero fluff.</p>
+            <h2 className="font-display text-4xl sm:text-5xl font-bold">Everything you need to <span className="text-gradient">get hired</span></h2>
+            <p className="mt-4 text-muted-foreground">One roast. Eight expert lenses. Zero fluff.</p>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {features.map((f) => (
@@ -150,10 +150,10 @@ function Landing() {
         <div className="mx-auto max-w-7xl px-6 relative">
           <div className="text-center max-w-2xl mx-auto mb-10">
             <div className="inline-flex items-center gap-2 glass rounded-full px-3 py-1 text-xs mb-4">
-              <Sparkles className="h-3 w-3 text-neon-pink" /> Live demo
+              <Sparkles className="h-3 w-3 text-neon-pink" /> Live roast
             </div>
             <h2 className="font-display text-4xl sm:text-5xl font-bold">Try it now</h2>
-            <p className="mt-4 text-muted-foreground">Paste any URL. Get a full audit dashboard in seconds.</p>
+            <p className="mt-4 text-muted-foreground">Paste your CV. Get your full roast on the next page.</p>
           </div>
           <DemoAnalyzer />
         </div>
@@ -163,7 +163,7 @@ function Landing() {
       <section className="py-24">
         <div className="mx-auto max-w-7xl px-6">
           <div className="text-center max-w-2xl mx-auto mb-14">
-            <h2 className="font-display text-4xl sm:text-5xl font-bold">Founders who shipped fixes</h2>
+            <h2 className="font-display text-4xl sm:text-5xl font-bold">Job seekers who landed offers</h2>
           </div>
           <div className="grid md:grid-cols-3 gap-6">
             {testimonials.map((t) => (
@@ -194,21 +194,21 @@ function Landing() {
         <div className="mx-auto max-w-5xl px-6">
           <div className="text-center max-w-2xl mx-auto mb-14">
             <h2 className="font-display text-4xl sm:text-5xl font-bold">Simple pricing</h2>
-            <p className="mt-4 text-muted-foreground">Start free. Upgrade when you want unlimited audits.</p>
+            <p className="mt-4 text-muted-foreground">Start free. Upgrade for unlimited roasts and PDF exports.</p>
           </div>
           <div className="grid md:grid-cols-2 gap-6">
             <PricingCard
               name="Free"
               price="$0"
-              tagline="For founders trying it out"
-              features={["1 roast per day", "Full UX + UI score", "Top 5 improvements"]}
+              tagline="For job seekers trying it out"
+              features={["1 roast per day", "Full CV scorecard", "Top 5 improvements"]}
               cta="Start free"
             />
             <PricingCard
               name="Pro"
               price="$19"
-              tagline="For teams shipping weekly"
-              features={["Unlimited audits", "Export PDF reports", "Competitor analysis", "AI redesign suggestions"]}
+              tagline="For active job hunters"
+              features={["Unlimited roasts", "Tailor to any job description", "Export PDF reports", "Cover letter rewrites"]}
               cta="Upgrade to Pro"
               highlight
             />
@@ -225,15 +225,15 @@ function Landing() {
           <Card className="glass-strong relative overflow-hidden p-12 text-center">
             <div className="relative">
               <h2 className="font-display text-5xl sm:text-6xl font-bold">
-                Stop <span className="text-gradient">Losing Users.</span>
+                Stop <span className="text-gradient">Getting Ghosted.</span>
               </h2>
               <p className="mt-4 text-muted-foreground max-w-xl mx-auto">
-                Every second you wait, more visitors bounce. Get your audit now.
+                Every week you wait, more interviews go to someone else. Roast your CV now.
               </p>
               <div className="mt-8">
                 <a href="#demo">
                   <Button variant="hero" size="lg" className="h-12 px-8 text-base">
-                    Roast My Website <ArrowRight className="h-4 w-4" />
+                    Roast My CV <ArrowRight className="h-4 w-4" />
                   </Button>
                 </a>
               </div>
