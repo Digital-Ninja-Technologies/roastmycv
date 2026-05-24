@@ -10,10 +10,10 @@ export function Footer() {
             <span className="inline-flex h-7 w-7 items-center justify-center rounded-lg bg-primary">
               <Flame className="h-4 w-4 text-white" />
             </span>
-            <span className="font-display font-semibold">RoastMySite <span className="text-gradient">AI</span></span>
+            <span className="font-display font-semibold">RoastMyCV <span className="text-gradient">AI</span></span>
           </div>
           <p className="mt-3 text-sm text-muted-foreground max-w-sm">
-            AI-powered website audits that actually improve conversions.
+            AI-powered CV roasts that actually land you interviews.
           </p>
         </div>
         <div className="text-sm">
@@ -33,7 +33,7 @@ export function Footer() {
         </div>
       </div>
       <div className="border-t border-border/50 py-6 text-center text-xs text-muted-foreground">
-        © {new Date().getFullYear()} RoastMySite AI. All rights reserved.
+        © {new Date().getFullYear()} RoastMyCV AI. All rights reserved.
       </div>
     </footer>
   );

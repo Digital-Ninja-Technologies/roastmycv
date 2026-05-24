@@ -12,13 +12,13 @@ export function Navbar() {
               <Flame className="h-4 w-4 text-white" />
             </span>
             <span className="font-display font-semibold tracking-tight">
-              RoastMySite <span className="text-gradient">AI</span>
+              RoastMyCV <span className="text-gradient">AI</span>
             </span>
           </Link>
           <div className="hidden md:flex items-center gap-7 text-sm text-muted-foreground">
             <a href="/#features" className="hover:text-foreground transition-colors">Features</a>
             <a href="/#how" className="hover:text-foreground transition-colors">How it works</a>
-            <a href="/#demo" className="hover:text-foreground transition-colors">Demo</a>
+            <a href="/#demo" className="hover:text-foreground transition-colors">Roast my CV</a>
             <Link to="/pricing" className="hover:text-foreground transition-colors">Pricing</Link>
           </div>
           <div className="flex items-center gap-2">

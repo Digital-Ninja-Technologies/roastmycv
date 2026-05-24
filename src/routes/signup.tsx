@@ -9,7 +9,7 @@ import { toast } from "sonner";
 import { useState } from "react";
 
 export const Route = createFileRoute("/signup")({
-  head: () => ({ meta: [{ title: "Sign up — RoastMySite AI" }] }),
+  head: () => ({ meta: [{ title: "Sign up — RoastMyCV AI" }] }),
   component: Signup,
 });
 

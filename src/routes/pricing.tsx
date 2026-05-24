@@ -8,7 +8,7 @@ import { Check } from "lucide-react";
 export const Route = createFileRoute("/pricing")({
   head: () => ({
     meta: [
-      { title: "Pricing — RoastMySite AI" },
+      { title: "Pricing — RoastMyCV AI" },
       { name: "description", content: "Simple, founder-friendly pricing for AI website audits." },
     ],
   }),
