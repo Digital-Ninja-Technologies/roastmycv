@@ -76,9 +76,9 @@ export function DemoAnalyzer() {
           className="h-11"
         />
         <label className="inline-flex">
-          <input type="file" accept=".txt,.md,.text" className="hidden" onChange={onFile} disabled={loading} />
-          <Button type="button" variant="glass" size="lg" className="h-11 px-4 w-full sm:w-auto" asChild>
-            <span><Upload className="h-4 w-4" /> Upload .txt</span>
+          <input type="file" accept=".pdf,.txt,.md,.text,application/pdf" className="hidden" onChange={onFile} disabled={loading || parsing} />
+          <Button type="button" variant="glass" size="lg" className="h-11 px-4 w-full sm:w-auto" asChild disabled={loading || parsing}>
+            <span><Upload className="h-4 w-4" /> {parsing ? "Reading PDF…" : "Upload PDF / .txt"}</span>
           </Button>
         </label>
       </div>
