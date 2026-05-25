@@ -38,7 +38,7 @@ function Pricing() {
             <h1 className="font-display text-5xl sm:text-6xl font-bold">Simple <span className="text-gradient">pricing</span></h1>
             <p className="mt-4 text-muted-foreground">Start free, upgrade when you need unlimited audits.</p>
           </div>
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
             {plans.map((p) => (
               <Card key={p.name} className={`relative p-8 ${p.highlight ? "glass-strong" : "glass"}`}>
                 {p.highlight && <div className="glow-ring rounded-xl" />}
