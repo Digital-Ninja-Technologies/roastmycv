@@ -180,6 +180,8 @@ export function generateMockReport(cvText: string, targetRole?: string): CVRepor
       after: "Led a 6-person cross-functional team to ship 4 product launches, generating $1.2M ARR in the first 6 months.",
     },
     roast: "Your CV reads like a LinkedIn 'About' section written at 2am. It tells me what you did but not why anyone should care. Recruiters spend 6 seconds — give them a reason to keep reading.",
+    atsKeywords: buildAts(cvText, targetRole),
+    skillsSection: buildSkillsSection(targetRole),
     createdAt: new Date().toISOString(),
   };
 }
