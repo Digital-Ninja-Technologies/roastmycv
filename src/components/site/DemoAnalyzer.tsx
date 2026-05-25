@@ -6,23 +6,44 @@ import { Textarea } from "@/components/ui/textarea";
 import { Loader2, Sparkles, Upload } from "lucide-react";
 import { toast } from "sonner";
 import { analyzeCV, saveReport } from "@/lib/analyze";
+import { extractPdfText } from "@/lib/pdf";
 
 export function DemoAnalyzer() {
   const [cvText, setCvText] = useState("");
   const [targetRole, setTargetRole] = useState("");
   const [loading, setLoading] = useState(false);
+  const [parsing, setParsing] = useState(false);
   const navigate = useNavigate();
 
   async function onFile(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
     if (!file) return;
-    if (file.size > 1_000_000) {
-      toast.error("File too large. Max 1MB. Paste the text instead.");
+    if (file.size > 10_000_000) {
+      toast.error("File too large. Max 10MB.");
       return;
     }
-    const text = await file.text();
-    setCvText(text);
-    toast.success(`Loaded ${file.name}`);
+    setParsing(true);
+    try {
+      let text = "";
+      const isPdf = file.type === "application/pdf" || /\.pdf$/i.test(file.name);
+      if (isPdf) {
+        text = await extractPdfText(file);
+        if (!text || text.length < 40) {
+          toast.error("Couldn't read text from this PDF. It may be scanned/image-based — paste the text instead.");
+          return;
+        }
+      } else {
+        text = await file.text();
+      }
+      setCvText(text);
+      toast.success(`Loaded ${file.name}`);
+    } catch (err) {
+      console.error(err);
+      toast.error("Failed to read file. Try pasting the text instead.");
+    } finally {
+      setParsing(false);
+      e.target.value = "";
+    }
   }
 
   async function onSubmit(e: React.FormEvent) {
