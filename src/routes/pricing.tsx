@@ -17,19 +17,14 @@ export const Route = createFileRoute("/pricing")({
 
 const plans = [
   {
-    name: "Free", price: "$0", tagline: "For founders just trying it out",
-    features: ["1 audit per day", "Full UX + UI scoring", "Top 5 improvements", "Mobile responsiveness check"],
+    name: "Free", price: "$0", tagline: "For job seekers just trying it out",
+    features: ["1 roast per day", "Full CV scorecard", "Top 5 improvements", "Keyword match check"],
     cta: "Start free", highlight: false,
   },
   {
-    name: "Pro", price: "$19", tagline: "For teams shipping weekly",
-    features: ["Unlimited audits", "Export PDF reports", "Competitor analysis", "AI redesign suggestions", "Saved report history", "Priority AI model"],
+    name: "Pro", price: "$20", tagline: "For active job hunters",
+    features: ["Unlimited roasts", "Tailor to any job description", "Export PDF reports", "Cover letter rewrites", "Saved roast history", "Priority AI model"],
     cta: "Upgrade to Pro", highlight: true,
-  },
-  {
-    name: "Team", price: "$49", tagline: "For agencies and studios",
-    features: ["Everything in Pro", "5 seats included", "White-label PDF export", "API access", "Dedicated support"],
-    cta: "Contact us", highlight: false,
   },
 ];
 
