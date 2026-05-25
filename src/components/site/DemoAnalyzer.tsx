@@ -93,7 +93,7 @@ export function DemoAnalyzer() {
 
       <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
         <p className="text-xs text-muted-foreground">
-          Tip: for best results, paste plain text (no PDFs). Your CV stays in your browser.
+          Tip: upload a PDF or paste plain text. Your CV stays in your browser.
         </p>
         <Button type="submit" variant="hero" size="lg" disabled={loading} className="h-12 px-6 w-full sm:w-auto">
           {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Sparkles className="h-4 w-4" />}
