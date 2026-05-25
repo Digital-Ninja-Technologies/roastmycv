@@ -15,6 +15,18 @@ export interface CVReport {
   summaryRewrite: { before: string; after: string };
   bulletRewrite: { before: string; after: string };
   roast: string;
+  atsKeywords: {
+    matchScore: number;
+    present: string[];
+    missing: string[];
+    recommended: string[];
+  };
+  skillsSection: {
+    coreCompetencies: string[];
+    technical: string[];
+    tools: string[];
+    soft: string[];
+  };
   createdAt: string;
 }
 
@@ -24,6 +36,105 @@ function inferName(cv: string): string {
   const firstLine = cv.split("\n").map((l) => l.trim()).find(Boolean) ?? "";
   if (firstLine && firstLine.length < 60 && /^[A-Za-z .'-]+$/.test(firstLine)) return firstLine;
   return "Your CV";
+}
+
+// Role-tailored keyword library (lightweight, no backend). Falls back to a
+// generic professional set when the target role doesn't match a known family.
+const ROLE_LIBRARY: Record<string, {
+  core: string[];
+  technical: string[];
+  tools: string[];
+  soft: string[];
+}> = {
+  product: {
+    core: ["Product Strategy", "Roadmapping", "Discovery", "Prioritization", "Go-to-Market", "OKRs", "Stakeholder Management", "A/B Testing"],
+    technical: ["SQL", "Analytics", "Experimentation", "User Research", "API Design", "Agile / Scrum"],
+    tools: ["Jira", "Linear", "Figma", "Amplitude", "Mixpanel", "Looker", "Notion"],
+    soft: ["Cross-functional Leadership", "Executive Communication", "Customer Empathy", "Decision-making"],
+  },
+  engineer: {
+    core: ["System Design", "API Development", "Microservices", "CI/CD", "Code Review", "Performance Optimization", "Scalability", "Testing"],
+    technical: ["TypeScript", "Node.js", "React", "Python", "PostgreSQL", "AWS", "Docker", "Kubernetes", "REST", "GraphQL"],
+    tools: ["Git", "GitHub Actions", "Datadog", "Sentry", "Terraform", "Jest"],
+    soft: ["Technical Leadership", "Mentorship", "Collaboration", "Problem-solving"],
+  },
+  designer: {
+    core: ["Design Systems", "User Research", "Prototyping", "Information Architecture", "Interaction Design", "Visual Design", "Accessibility (WCAG)"],
+    technical: ["Wireframing", "Usability Testing", "Heuristic Evaluation", "Design Tokens"],
+    tools: ["Figma", "Sketch", "Framer", "Adobe Creative Suite", "Maze", "Notion"],
+    soft: ["Cross-functional Collaboration", "Storytelling", "Stakeholder Alignment"],
+  },
+  marketing: {
+    core: ["Growth Marketing", "Lifecycle", "SEO", "SEM", "Content Strategy", "Brand Positioning", "Funnel Optimization", "Attribution"],
+    technical: ["A/B Testing", "Segmentation", "Email Automation", "Analytics"],
+    tools: ["HubSpot", "Marketo", "Google Analytics", "Mixpanel", "Webflow", "Ahrefs"],
+    soft: ["Storytelling", "Cross-functional Collaboration", "Data-driven Decisions"],
+  },
+  data: {
+    core: ["Data Modeling", "ETL / ELT", "Experimentation", "Statistical Analysis", "Forecasting", "Dashboarding"],
+    technical: ["SQL", "Python", "Pandas", "dbt", "Airflow", "Spark", "BigQuery", "Snowflake"],
+    tools: ["Looker", "Tableau", "Mode", "Hex", "Git"],
+    soft: ["Storytelling with Data", "Stakeholder Communication", "Rigor"],
+  },
+  sales: {
+    core: ["Pipeline Management", "Prospecting", "Discovery", "Negotiation", "Closing", "Account Planning", "Quota Attainment"],
+    technical: ["MEDDIC", "SPIN", "Forecasting", "Territory Planning"],
+    tools: ["Salesforce", "HubSpot", "Outreach", "Gong", "LinkedIn Sales Navigator"],
+    soft: ["Active Listening", "Executive Presence", "Resilience"],
+  },
+  generic: {
+    core: ["Project Management", "Strategic Planning", "Stakeholder Management", "Process Improvement", "Cross-functional Collaboration"],
+    technical: ["Data Analysis", "Reporting", "Budgeting", "Forecasting"],
+    tools: ["Excel", "Google Workspace", "Notion", "Slack", "Jira"],
+    soft: ["Communication", "Leadership", "Adaptability", "Problem-solving"],
+  },
+};
+
+function roleFamily(role?: string): keyof typeof ROLE_LIBRARY {
+  const r = (role ?? "").toLowerCase();
+  if (!r) return "generic";
+  if (/(product manager|product owner|\bpm\b|product)/.test(r)) return "product";
+  if (/(engineer|developer|software|swe|backend|frontend|full[- ]?stack|devops|sre)/.test(r)) return "engineer";
+  if (/(design|ux|ui|product designer)/.test(r)) return "designer";
+  if (/(market|growth|seo|content|brand|lifecycle)/.test(r)) return "marketing";
+  if (/(data|analytics|analyst|scientist|ml|machine learning)/.test(r)) return "data";
+  if (/(sales|account executive|\bae\b|bdr|sdr|account manager)/.test(r)) return "sales";
+  return "generic";
+}
+
+function buildAts(cvText: string, role?: string) {
+  const lib = ROLE_LIBRARY[roleFamily(role)];
+  const haystack = cvText.toLowerCase();
+  const all = [...lib.core, ...lib.technical, ...lib.tools];
+  const present: string[] = [];
+  const missing: string[] = [];
+  for (const kw of all) {
+    if (haystack.includes(kw.toLowerCase())) present.push(kw);
+    else missing.push(kw);
+  }
+  const matchScore = Math.round((present.length / Math.max(all.length, 1)) * 100);
+  // Recommended = top missing, prioritising core then technical then tools
+  const prioritised = [
+    ...lib.core.filter((k) => missing.includes(k)),
+    ...lib.technical.filter((k) => missing.includes(k)),
+    ...lib.tools.filter((k) => missing.includes(k)),
+  ];
+  return {
+    matchScore,
+    present: present.slice(0, 12),
+    missing: missing.slice(0, 12),
+    recommended: prioritised.slice(0, 8),
+  };
+}
+
+function buildSkillsSection(role?: string) {
+  const lib = ROLE_LIBRARY[roleFamily(role)];
+  return {
+    coreCompetencies: lib.core.slice(0, 8),
+    technical: lib.technical.slice(0, 8),
+    tools: lib.tools.slice(0, 8),
+    soft: lib.soft.slice(0, 6),
+  };
 }
 
 export function generateMockReport(cvText: string, targetRole?: string): CVReport {
@@ -69,6 +180,8 @@ export function generateMockReport(cvText: string, targetRole?: string): CVRepor
       after: "Led a 6-person cross-functional team to ship 4 product launches, generating $1.2M ARR in the first 6 months.",
     },
     roast: "Your CV reads like a LinkedIn 'About' section written at 2am. It tells me what you did but not why anyone should care. Recruiters spend 6 seconds — give them a reason to keep reading.",
+    atsKeywords: buildAts(cvText, targetRole),
+    skillsSection: buildSkillsSection(targetRole),
     createdAt: new Date().toISOString(),
   };
 }
