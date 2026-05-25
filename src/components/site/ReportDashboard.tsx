@@ -122,6 +122,112 @@ export function ReportDashboard({ report }: { report: CVReport }) {
           </div>
         </Card>
       </div>
+
+      {/* ATS keyword match */}
+      <Card className="glass p-6">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-5">
+          <div className="flex items-center gap-2">
+            <Target className="h-5 w-5 text-neon-blue" />
+            <h3 className="font-display text-lg">
+              ATS keyword match{report.targetRole ? ` — ${report.targetRole}` : ""}
+            </h3>
+          </div>
+          <div className="flex items-center gap-3">
+            <span className="text-xs text-muted-foreground">Match score</span>
+            <span className="font-display text-2xl text-gradient">{report.atsKeywords.matchScore}%</span>
+          </div>
+        </div>
+        <Progress value={report.atsKeywords.matchScore} className="h-1.5 mb-6" />
+
+        <div className="grid gap-6 md:grid-cols-3">
+          <div>
+            <div className="text-xs uppercase tracking-wider text-muted-foreground mb-2">
+              Found in your CV
+            </div>
+            <div className="flex flex-wrap gap-1.5">
+              {report.atsKeywords.present.length ? (
+                report.atsKeywords.present.map((k) => (
+                  <Badge
+                    key={k}
+                    variant="outline"
+                    className="border-[oklch(0.78_0.2_160)]/40 text-[oklch(0.85_0.18_160)] bg-[oklch(0.78_0.2_160)]/10"
+                  >
+                    {k}
+                  </Badge>
+                ))
+              ) : (
+                <span className="text-xs text-muted-foreground">No target keywords detected.</span>
+              )}
+            </div>
+          </div>
+
+          <div>
+            <div className="text-xs uppercase tracking-wider text-muted-foreground mb-2">
+              Missing — add if true
+            </div>
+            <div className="flex flex-wrap gap-1.5">
+              {report.atsKeywords.missing.map((k) => (
+                <Badge
+                  key={k}
+                  variant="outline"
+                  className="border-destructive/40 text-destructive bg-destructive/5"
+                >
+                  {k}
+                </Badge>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <div className="text-xs uppercase tracking-wider text-muted-foreground mb-2">
+              Priority adds for this role
+            </div>
+            <ul className="space-y-2">
+              {report.atsKeywords.recommended.map((k, i) => (
+                <li key={k} className="flex items-start gap-2 text-sm">
+                  <span className="mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-md bg-primary text-[10px] font-semibold text-white">
+                    {i + 1}
+                  </span>
+                  <span className="text-gradient font-medium">{k}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </Card>
+
+      {/* Optimized skills section */}
+      <Card className="glass p-6">
+        <div className="flex items-center justify-between mb-4 gap-3 flex-wrap">
+          <div className="flex items-center gap-2">
+            <Wrench className="h-5 w-5 text-neon-pink" />
+            <h3 className="font-display text-lg">Optimized skills section — copy &amp; paste</h3>
+          </div>
+          <span className="text-xs text-muted-foreground">
+            Tailored to {report.targetRole ?? "your role"}
+          </span>
+        </div>
+
+        <div className="rounded-xl border border-border/70 bg-background/40 p-5 space-y-4 font-sans">
+          <SkillRow label="Core Competencies" items={report.skillsSection.coreCompetencies} />
+          <SkillRow label="Technical Skills" items={report.skillsSection.technical} />
+          <SkillRow label="Tools &amp; Platforms" items={report.skillsSection.tools} />
+          <SkillRow label="Soft Skills" items={report.skillsSection.soft} />
+        </div>
+        <p className="text-xs text-muted-foreground mt-3">
+          Only include skills you can defend in an interview. ATS scans for exact matches — use the
+          same wording as the job description where possible.
+        </p>
+      </Card>
+    </div>
+  );
+}
+
+function SkillRow({ label, items }: { label: string; items: string[] }) {
+  return (
+    <div className="grid sm:grid-cols-[180px_1fr] gap-2 sm:gap-4">
+      <div className="text-xs uppercase tracking-wider text-muted-foreground pt-1">{label}</div>
+      <div className="text-sm leading-relaxed">{items.join(" · ")}</div>
     </div>
   );
 }
