@@ -17,19 +17,14 @@ export const Route = createFileRoute("/pricing")({
 
 const plans = [
   {
-    name: "Free", price: "$0", tagline: "For founders just trying it out",
-    features: ["1 audit per day", "Full UX + UI scoring", "Top 5 improvements", "Mobile responsiveness check"],
+    name: "Free", price: "$0", tagline: "For job seekers just trying it out",
+    features: ["1 roast per day", "Full CV scorecard", "Top 5 improvements", "Keyword match check"],
     cta: "Start free", highlight: false,
   },
   {
-    name: "Pro", price: "$19", tagline: "For teams shipping weekly",
-    features: ["Unlimited audits", "Export PDF reports", "Competitor analysis", "AI redesign suggestions", "Saved report history", "Priority AI model"],
+    name: "Pro", price: "$20", tagline: "For active job hunters",
+    features: ["Unlimited roasts", "Tailor to any job description", "Export PDF reports", "Cover letter rewrites", "Saved roast history", "Priority AI model"],
     cta: "Upgrade to Pro", highlight: true,
-  },
-  {
-    name: "Team", price: "$49", tagline: "For agencies and studios",
-    features: ["Everything in Pro", "5 seats included", "White-label PDF export", "API access", "Dedicated support"],
-    cta: "Contact us", highlight: false,
   },
 ];
 
@@ -43,7 +38,7 @@ function Pricing() {
             <h1 className="font-display text-5xl sm:text-6xl font-bold">Simple <span className="text-gradient">pricing</span></h1>
             <p className="mt-4 text-muted-foreground">Start free, upgrade when you need unlimited audits.</p>
           </div>
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
             {plans.map((p) => (
               <Card key={p.name} className={`relative p-8 ${p.highlight ? "glass-strong" : "glass"}`}>
                 {p.highlight && <div className="glow-ring rounded-xl" />}

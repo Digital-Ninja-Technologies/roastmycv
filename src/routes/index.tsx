@@ -206,7 +206,7 @@ function Landing() {
             />
             <PricingCard
               name="Pro"
-              price="$19"
+              price="$20"
               tagline="For active job hunters"
               features={["Unlimited roasts", "Tailor to any job description", "Export PDF reports", "Cover letter rewrites"]}
               cta="Upgrade to Pro"
