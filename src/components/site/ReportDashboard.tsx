@@ -2,7 +2,7 @@ import { ScoreRing } from "./ScoreRing";
 import { Card } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
-import { CheckCircle2, AlertTriangle, Sparkles, ArrowRight, Flame } from "lucide-react";
+import { CheckCircle2, AlertTriangle, Sparkles, ArrowRight, Flame, Target, Wrench } from "lucide-react";
 import type { CVReport } from "@/lib/analyze";
 
 export function ReportDashboard({ report }: { report: CVReport }) {
