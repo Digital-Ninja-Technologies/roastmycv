@@ -1,37 +1,65 @@
-// Extract text from a PDF file in the browser using pdfjs-dist.
-// Loaded dynamically to avoid SSR (DOMMatrix is not defined on the server).
+type PdfJsModule = {
+  GlobalWorkerOptions: {
+    workerSrc?: string;
+    workerPort?: Worker;
+  };
+  getDocument: (src: { data: Uint8Array; useWorkerFetch?: boolean; isEvalSupported?: boolean }) => {
+    promise: Promise<{
+      numPages: number;
+      getPage: (pageNumber: number) => Promise<{
+        getTextContent: () => Promise<{
+          items: Array<{ str?: string }>;
+        }>;
+      }>;
+    }>;
+  };
+  version?: string;
+};
 
-export async function extractPdfText(file: File): Promise<string> {
+let pdfjsModulePromise: Promise<PdfJsModule> | undefined;
+
+async function getPdfJs(): Promise<PdfJsModule> {
   if (typeof window === "undefined") {
     throw new Error("PDF parsing is only available in the browser.");
   }
-  const pdfjsLib: any = await import("pdfjs-dist");
+
+  if (!pdfjsModulePromise) {
+    pdfjsModulePromise = import("pdfjs-dist/legacy/build/pdf.mjs") as Promise<PdfJsModule>;
+  }
+
+  const pdfjsLib = await pdfjsModulePromise;
 
   if (!pdfjsLib.GlobalWorkerOptions.workerSrc && !pdfjsLib.GlobalWorkerOptions.workerPort) {
     try {
-      // Vite-friendly worker URL
-      const workerUrl = new URL(
-        "pdfjs-dist/build/pdf.worker.min.mjs",
+      pdfjsLib.GlobalWorkerOptions.workerSrc = new URL(
+        "../node_modules/pdfjs-dist/legacy/build/pdf.worker.min.mjs",
         import.meta.url,
       ).toString();
-      pdfjsLib.GlobalWorkerOptions.workerSrc = workerUrl;
     } catch {
-      // Fallback to CDN matching installed version
       const version = pdfjsLib.version ?? "5.7.284";
-      pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdn.jsdelivr.net/npm/pdfjs-dist@${version}/build/pdf.worker.min.mjs`;
+      pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdn.jsdelivr.net/npm/pdfjs-dist@${version}/legacy/build/pdf.worker.min.mjs`;
     }
   }
 
+  return pdfjsLib;
+}
+
+export async function extractPdfText(file: File): Promise<string> {
+  const pdfjsLib = await getPdfJs();
   const buf = await file.arrayBuffer();
-  const pdf = await pdfjsLib.getDocument({ data: new Uint8Array(buf) }).promise;
+  const pdf = await pdfjsLib.getDocument({
+    data: new Uint8Array(buf),
+    useWorkerFetch: true,
+    isEvalSupported: false,
+  }).promise;
+
   let out = "";
   for (let i = 1; i <= pdf.numPages; i++) {
     const page = await pdf.getPage(i);
     const content = await page.getTextContent();
-    const strings = content.items
-      .map((it: any) => ("str" in it ? it.str : ""))
-      .filter(Boolean);
+    const strings = content.items.map((it) => it.str ?? "").filter(Boolean);
     out += strings.join(" ") + "\n\n";
   }
+
   return out.trim();
 }
