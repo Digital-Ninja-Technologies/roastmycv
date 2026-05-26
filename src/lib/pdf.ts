@@ -3,7 +3,13 @@ type PdfJsModule = {
     workerSrc?: string;
     workerPort?: Worker;
   };
-  getDocument: (src: { data: Uint8Array; useWorkerFetch?: boolean; isEvalSupported?: boolean }) => {
+  getDocument: (src: {
+    data: Uint8Array;
+    useWorkerFetch?: boolean;
+    isEvalSupported?: boolean;
+    disableWorker?: boolean;
+    standardFontDataUrl?: string;
+  }) => {
     promise: Promise<{
       numPages: number;
       getPage: (pageNumber: number) => Promise<{
@@ -29,28 +35,18 @@ async function getPdfJs(): Promise<PdfJsModule> {
 
   const pdfjsLib = await pdfjsModulePromise;
 
-  if (!pdfjsLib.GlobalWorkerOptions.workerSrc && !pdfjsLib.GlobalWorkerOptions.workerPort) {
-    try {
-      pdfjsLib.GlobalWorkerOptions.workerSrc = new URL(
-        "../node_modules/pdfjs-dist/legacy/build/pdf.worker.min.mjs",
-        import.meta.url,
-      ).toString();
-    } catch {
-      const version = pdfjsLib.version ?? "5.7.284";
-      pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdn.jsdelivr.net/npm/pdfjs-dist@${version}/legacy/build/pdf.worker.min.mjs`;
-    }
-  }
-
   return pdfjsLib;
 }
 
 export async function extractPdfText(file: File): Promise<string> {
   const pdfjsLib = await getPdfJs();
   const buf = await file.arrayBuffer();
+  const version = pdfjsLib.version ?? "5.7.284";
   const pdf = await pdfjsLib.getDocument({
     data: new Uint8Array(buf),
-    useWorkerFetch: true,
+    disableWorker: true,
     isEvalSupported: false,
+    standardFontDataUrl: `https://cdn.jsdelivr.net/npm/pdfjs-dist@${version}/standard_fonts/`,
   }).promise;
 
   let out = "";
