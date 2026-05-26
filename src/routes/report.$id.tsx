@@ -5,8 +5,9 @@ import { Footer } from "@/components/site/Footer";
 import { Button } from "@/components/ui/button";
 import { ReportDashboard } from "@/components/site/ReportDashboard";
 import { generateMockReport, loadReport, type CVReport } from "@/lib/analyze";
-import { ArrowLeft, Download } from "lucide-react";
+import { ArrowLeft, FileDown } from "lucide-react";
 import { toast } from "sonner";
+import { exportAtsPdf } from "@/lib/exportAtsPdf";
 
 export const Route = createFileRoute("/report/$id")({
   head: () => ({ meta: [{ title: "Your CV Roast — RoastMyCV AI" }] }),
@@ -41,8 +42,21 @@ function ReportDetail() {
                 <ArrowLeft className="h-4 w-4" /> Roast another CV
               </Button>
             </Link>
-            <Button variant="glass" size="sm" onClick={() => toast("PDF export is a Pro feature ✨")}>
-              <Download className="h-4 w-4" /> Export PDF
+            <Button
+              variant="glass"
+              size="sm"
+              disabled={!report}
+              onClick={() => {
+                if (!report) return;
+                try {
+                  exportAtsPdf(report);
+                  toast.success("ATS PDF downloaded");
+                } catch {
+                  toast.error("Couldn't export PDF. Try again.");
+                }
+              }}
+            >
+              <FileDown className="h-4 w-4" /> Export ATS PDF
             </Button>
           </div>
           {report ? (
