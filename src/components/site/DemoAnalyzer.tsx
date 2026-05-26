@@ -6,7 +6,6 @@ import { Textarea } from "@/components/ui/textarea";
 import { Loader2, Sparkles, Upload } from "lucide-react";
 import { toast } from "sonner";
 import { analyzeCV, saveReport } from "@/lib/analyze";
-import { extractPdfText } from "@/lib/pdf";
 
 export function DemoAnalyzer() {
   const [cvText, setCvText] = useState("");
@@ -27,6 +26,7 @@ export function DemoAnalyzer() {
       let text = "";
       const isPdf = file.type === "application/pdf" || /\.pdf$/i.test(file.name);
       if (isPdf) {
+        const { extractPdfText } = await import("@/lib/pdf");
         text = await extractPdfText(file);
         if (!text || text.length < 40) {
           toast.error("Couldn't read text from this PDF. It may be scanned/image-based — paste the text instead.");
